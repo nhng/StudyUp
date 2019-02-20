@@ -16,11 +16,11 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Event updateEventName(int eventID, String name) throws StudyUpException {
 		Event event = DataStorage.eventData.get(eventID);
-		if(event == null) {
+		if (event == null) {
 			throw new StudyUpException("No event found.");
 		}
 
-		if(name.length() >= 20) {
+		if (name.length() >= 20) {
 			throw new StudyUpException("Length too long. Maximun is 20");
 		}
 		event.setName(name);
@@ -63,20 +63,20 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Event addStudentToEvent(Student student, int eventID) throws StudyUpException {
 		Event event = DataStorage.eventData.get(eventID);
-		if(event == null) {
+		if (event == null) {
 			throw new StudyUpException("No event found.");
 		}
 		List<Student> presentStudents = event.getStudents();
-		if(presentStudents == null) {
+		if (presentStudents == null) {
 			presentStudents = new ArrayList<>();
 		}
 		presentStudents.add(student);
-		event.setStudents(presentStudents);		
+		event.setStudents(presentStudents);
 		return DataStorage.eventData.put(eventID, event);
 	}
 
 	@Override
-	public Event deleteEvent(int eventID) {		
+	public Event deleteEvent(int eventID) {
 		return DataStorage.eventData.remove(eventID);
 	}
 
